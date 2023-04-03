@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const PostItem = (props) => {
 const {title, image, excerpt, date, slug} = props.post   
-console.log({slug,image})
+
 
 const formattedDate = new Date(date).toLocaleDateString('fr-FR', {
   day:"numeric",
