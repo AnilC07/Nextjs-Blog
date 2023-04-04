@@ -13,8 +13,6 @@ async function sendContactData(contactDetails) {
 
   const data = await response.json();
 
-  console.log({ data });
-
   if (!response.ok) {
     throw new Error(data.message || "Something went wrong");
   }
@@ -28,14 +26,18 @@ function ContactForm() {
   const [requestError, setRequestError] = useState();
 
   useEffect(() => {
-    if (requestStatus === "pending" || requestStatus === "error" || requestStatus === "success") {
+    if (
+      requestStatus === "pending" ||
+      requestStatus === "error" ||
+      requestStatus === "success"
+    ) {
       const timer = setTimeout(() => {
         setRequestError(null);
         setRequestStatus(null);
       }, 3000);
-   
-    return () => clearTimeout(timer);
-  }
+
+      return () => clearTimeout(timer);
+    }
   }, [requestStatus]);
 
   async function sendMessageHandler(e) {

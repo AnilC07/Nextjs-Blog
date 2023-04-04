@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 async function handler(req, res) {
   if (req.method === "POST") {
     const { email, name, message } = req.body;
-    console.log({ email, name, message });
+
     // ServerSide validation
     if (!email || !email.includes("@") || !name || !message) {
       res.status(422).json({ message: "Invalid input" });
@@ -12,13 +12,12 @@ async function handler(req, res) {
 
     // Store in DB
     const newMessage = { email, name, message };
-    console.log(newMessage);
+
+    const connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clusterName}.b3tjvwe.mongodb.net/${process.env.mongodb_database}`;
 
     let client;
     try {
-      client = await MongoClient.connect(
-        "mongodb+srv://anilcelik075:ny1NVzkNhe8piLBf@cluster0.b3tjvwe.mongodb.net/contact"
-      );
+      client = await MongoClient.connect(connectionString);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
