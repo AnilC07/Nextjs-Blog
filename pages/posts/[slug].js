@@ -6,7 +6,6 @@ import { getPostData, getPostFiles } from "../../lib/post-util";
 
 // On utilise le slug pour que ce soit 'human readable' et 'search engine friendly'
 const PostDetailPage = (props) => {
-  console.log(props.post.title)
   return (
     <Fragment>
       <Head>
@@ -22,7 +21,6 @@ export function getStaticProps(context) {
   const { params } = context;
   const { slug } = params;
   const postData = getPostData(slug);
-
 
   return {
     props: {
